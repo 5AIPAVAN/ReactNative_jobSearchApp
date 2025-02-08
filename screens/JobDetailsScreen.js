@@ -142,6 +142,42 @@ export default function JobDetailsScreen() {
           ))}
         </View>
 
+        <View style={styles.divider}>
+  <Text> </Text> 
+</View>
+
+<Text style={styles.about}>Additional details</Text>
+
+{/* {job?.content && (
+      <View style={styles.additionalDetailsContainer}>
+        {Object.entries(JSON.parse(job.content)).map(([key, value]) => (
+          <Text key={key} style={styles.detailText}>{value}</Text>
+        ))}
+      </View>
+    )} */}
+
+
+{job?.content ? (() => {
+  try {
+    const parsedContent = JSON.parse(job.content);
+    const hasDetails = Object.keys(parsedContent).length > 0;
+
+    return hasDetails ? (
+      <View style={styles.additionalDetailsContainer}>
+        {Object.entries(parsedContent).map(([key, value]) => (
+          <Text key={key} style={styles.detailText}>{value}</Text>
+        ))}
+      </View>
+    ) : (
+      <Text style={styles.noAdditionalDetailsText}>No additional details</Text>
+    );
+  } catch (error) {
+    console.error("Error parsing job content:", error);
+    return <Text style={styles.noAdditionalDetailsText}>No additional details</Text>;
+  }
+})() : <Text style={styles.noAdditionalDetailsText}>No additional details avaiable</Text>}
+
+
 
       </ScrollView>
 
@@ -301,7 +337,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 10,
-    marginBottom:50
+    marginBottom:10
   },
   tag: {
     paddingVertical: 6,

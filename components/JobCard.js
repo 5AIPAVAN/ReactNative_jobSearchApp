@@ -13,7 +13,8 @@ const getDaysAgo = (updatedDate) => {
   const now = new Date().getTime(); // Current timestamp
   const diffInMs = now - updatedOn; // Difference in milliseconds
   const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24)); // Convert to days
-  return diffInDays === 0 ? "Today" : `${diffInDays%10} days ago`; // Display result
+  // return diffInDays === 0 ? "Today" : `${diffInDays%10} days ago`; 
+  return diffInDays === 0 ? "Today" : diffInDays % 10 === 0 ? "Active recently" : ` Active ${diffInDays%10} days ago`;
 };
 
   return (
@@ -44,7 +45,7 @@ const getDaysAgo = (updatedDate) => {
 
       </View>
 
-      <Text style={styles.postedText}>Active {getDaysAgo(job.updated_on)}</Text>
+      <Text style={styles.postedText}>{getDaysAgo(job.updated_on)}</Text>
 
     </TouchableOpacity>
   );
@@ -52,7 +53,7 @@ const getDaysAgo = (updatedDate) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',   // White card background
+   backgroundColor: '#fff',  
     borderRadius: 10,          // Rounded corners
     padding: 15,               // Inner spacing
     marginVertical: 10,        // Space between cards
@@ -73,7 +74,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,           
     fontWeight: 'bold',       
-    color: '#333',            
+   // color: '#333',        
+    color:'#444a4a',    
     marginBottom: 5,          
   },
   id: {
