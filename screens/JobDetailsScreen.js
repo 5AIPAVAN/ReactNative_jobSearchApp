@@ -55,8 +55,8 @@ export default function JobDetailsScreen() {
   
 
   const handleJoinWhatsApp = () => {
-    if (job.contact_preference.whatsapp_link) {
-      Linking.openURL(job.contact_preference.whatsapp_link);
+    if (job.whatsapp_link) {
+      Linking.openURL(job.whatsapp_link);
     } else {
       Toast.show({
         type: 'error',
@@ -78,7 +78,7 @@ export default function JobDetailsScreen() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer} >
-        <Image source={{ uri: job.creatives[0].file || 'https://via.placeholder.com/400' }} style={styles.image} />
+        <Image source={{ uri: job.creatives || 'https://via.placeholder.com/400' }} style={styles.image} />
         <Text style={styles.title}>{job.title}</Text>
         {/* <Text style={styles.company}>{job.company_name === "" ? 'N/A' : job.company_name}</Text> */}
         <View style={styles.cdetails}>
@@ -148,14 +148,6 @@ export default function JobDetailsScreen() {
 
 <Text style={styles.about}>Additional details</Text>
 
-{/* {job?.content && (
-      <View style={styles.additionalDetailsContainer}>
-        {Object.entries(JSON.parse(job.content)).map(([key, value]) => (
-          <Text key={key} style={styles.detailText}>{value}</Text>
-        ))}
-      </View>
-    )} */}
-
 
 {job?.content ? (() => {
   try {
@@ -188,10 +180,6 @@ export default function JobDetailsScreen() {
     <Text style={styles.whatsappText}>Join Group</Text>
   </TouchableOpacity>
 
-  {/* <TouchableOpacity style={styles.bookmarkButton} onPress={handleBookmark}>
-  <FontAwesome name="bookmark" size={20} color="white" style={{ marginRight: 5 }} />
-    <Text style={styles.buttonText}> Save</Text>
-  </TouchableOpacity> */}
 
 <TouchableOpacity
       style={[

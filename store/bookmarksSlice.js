@@ -9,13 +9,11 @@ const bookmarksSlice = createSlice({
       state.bookmarkedJobs = action.payload;
     },
     addBookmark: (state, action) => {
-      // Check if the job is already bookmarked
       const existingJob = state.bookmarkedJobs.find(
         (job) => job.id === action.payload.id
       );
       
       if (!existingJob) {
-        // If the job isn't already bookmarked, add it to the array
         state.bookmarkedJobs.push(action.payload);
         AsyncStorage.setItem('bookmarks', JSON.stringify(state.bookmarkedJobs));
       }

@@ -9,19 +9,17 @@ export default function JobCard({ job, onPress }) {
   
 // Function to calculate "X days ago"
 const getDaysAgo = (updatedDate) => {
-  const updatedOn = new Date(updatedDate).getTime();  // Convert to timestamp
-  const now = new Date().getTime(); // Current timestamp
-  const diffInMs = now - updatedOn; // Difference in milliseconds
-  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24)); // Convert to days
-  // return diffInDays === 0 ? "Today" : `${diffInDays%10} days ago`; 
+  const updatedOn = new Date(updatedDate).getTime(); 
+  const now = new Date().getTime(); 
+  const diffInMs = now - updatedOn; 
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24)); 
   return diffInDays === 0 ? "Today" : diffInDays % 10 === 0 ? "Active recently" : ` Active ${diffInDays%10} days ago`;
 };
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.card}>
+    <TouchableOpacity onPress={onPress} style={styles.card}  activeOpacity={0.8}>
       <View style={styles.cardContent}>
         <Text style={styles.title}>{job.title}</Text>
-        {/* <Text style={styles.company}>{job.company_name}</Text> */}
         
         
         <View style={styles.details}>
@@ -54,15 +52,15 @@ const getDaysAgo = (updatedDate) => {
 const styles = StyleSheet.create({
   card: {
    backgroundColor: '#fff',  
-    borderRadius: 10,          // Rounded corners
-    padding: 15,               // Inner spacing
-    marginVertical: 10,        // Space between cards
-    marginHorizontal: 20,      // Left & Right margins
-    shadowColor: '#000',       // Shadow effect
+    borderRadius: 10,        
+    padding: 15,              
+    marginVertical: 10,        
+    marginHorizontal: 20,     
+    shadowColor: '#000',      
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,        
     shadowRadius: 5,
-    elevation: 3,              // Shadow for Android
+    elevation: 3,             
   },
   cardContent: {
     alignItems: 'flex-start',  // Align text to the left
